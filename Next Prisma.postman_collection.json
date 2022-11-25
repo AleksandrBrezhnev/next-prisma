@@ -1,0 +1,516 @@
+{
+	"info": {
+		"_postman_id": "c28b10be-ccea-459b-93aa-bacb129286e4",
+		"name": "Next Prisma",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13151035"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign Up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"pm.collectionVariables.set(\"access\", data.access);",
+									"pm.collectionVariables.set(\"refresh\", data.refresh);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"name\": \"john\", \n    \"email\": \"john@gmail.com\", \n    \"avatar\": \"someurl\", \n    \"password\": \"testpas\", \n    \"repeatPassword\": \"testpas\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/auth/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign In",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"pm.collectionVariables.set(\"access\", data.access);",
+									"pm.collectionVariables.set(\"refresh\", data.refresh);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"john@gmail.com\", \n    \"password\": \"testpas\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/auth/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Get Many Posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"name\": \"john\", \n    \"email\": \"john@gmail.com\", \n    \"avatar\": \"someurl\", \n    \"password\": \"testpas\", \n    \"repeatPassword\": \"testpas\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/posts?perPage=2&page=1&sortBy=id&sortDirection=straight",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "perPage",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "sortBy",
+									"value": "id"
+								},
+								{
+									"key": "sortDirection",
+									"value": "straight"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"name\": \"john\", \n    \"email\": \"john@gmail.com\", \n    \"avatar\": \"someurl\", \n    \"password\": \"testpas\", \n    \"repeatPassword\": \"testpas\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/posts/myPosts?perPage=3&page=1&sortBy=id&sortDirection=straight",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"myPosts"
+							],
+							"query": [
+								{
+									"key": "perPage",
+									"value": "3"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "sortBy",
+									"value": "id"
+								},
+								{
+									"key": "sortDirection",
+									"value": "straight"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Post",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"john@gmail.com\", \n    \"password\": \"testpassword\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/posts/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"New Post 4\",\n  \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a felis nunc. Praesent viverra gravida mauris, a porttitor mauris aliquet non. Quisque placerat tempus elit, vitae pharetra augue scelerisque id. Mauris vehicula vulputate libero sit amet mollis. Quisque dictum enim et dolor congue feugiat. Sed porta non odio ac gravida. Nullam eget commodo est. Ut eu elit at erat elementum facilisis. Duis cursus fermentum lacinia. Maecenas at nisl et odio consequat maximus. In ut est laoreet, scelerisque elit id, dictum lectus. Donec eget bibendum urna.\",\n  \"authorId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/posts/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Likes",
+			"item": [
+				{
+					"name": "Get Likes for Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/likes/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"likes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Like",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/likes/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"likes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Like",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/likes/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"likes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Get Comments for Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/comments/:id?perPage=3&page=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"comments",
+								":id"
+							],
+							"query": [
+								{
+									"key": "perPage",
+									"value": "3"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"text\": \"My respect, nice post\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/comments/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"comments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "access",
+			"value": ""
+		},
+		{
+			"key": "refresh",
+			"value": ""
+		}
+	]
+}
